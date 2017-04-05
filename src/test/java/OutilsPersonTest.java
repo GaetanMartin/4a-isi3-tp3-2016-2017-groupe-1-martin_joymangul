@@ -9,6 +9,7 @@ import java.util.GregorianCalendar;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Matchers.any;
 
 /**
  * Created by p1509413 on 05/04/2017.
@@ -25,9 +26,10 @@ public class OutilsPersonTest {
 
         this.persons = new ArrayList<>();
         this.testDate = new GregorianCalendar(2000, 10, 5);
+        //this.testDate = any(GregorianCalendar.class);
 
         Person person = Mockito.mock(Person.class);
-        Mockito.when(person.getAge(this.testDate)).thenReturn(10);
+        Mockito.when(person.getAge(testDate)).thenReturn(10);
         persons.add(person);
         person = Mockito.mock(Person.class);
         Mockito.when(person.getAge(this.testDate)).thenReturn(20);
@@ -44,5 +46,18 @@ public class OutilsPersonTest {
     public void testMaxAge() {
         assertThat(OutilsPerson.getMaxAge(this.persons, this.testDate)).isEqualTo(20);
     }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void should_get_illegal_argument_exception() {
+        OutilsPerson.getPersonsInRangeAge(this.persons, this.testDate, 25, 15);
+    }
+
+    @Test
+    public void should_get_minus1_getMaxAge() {
+        List<IPerson> personsEmpty = new ArrayList<>();
+        int age = OutilsPerson.getMaxAge(personsEmpty, this.testDate);
+        assertThat(age == -1).isEqualTo(true);
+    }
+
 
 }
