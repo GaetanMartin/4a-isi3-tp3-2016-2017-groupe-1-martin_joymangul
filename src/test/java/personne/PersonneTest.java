@@ -51,4 +51,40 @@ public class PersonneTest {
         // assertThat(age == THEORIC_AGE).isTrue();
     }
 
+    @Test
+    public void should_give_true_on_date_after_wasBorn()  {
+        // Given
+        testDate = new GregorianCalendar(2017, 5,30);
+
+        // When
+        boolean result = person.wasBorn(testDate);
+
+        // Then
+        assertThat(result).isTrue();
+    }
+
+    @Test
+    public void should_give_23_on_date_after_getAge()  {
+        // Given
+        testDate = new GregorianCalendar(2017, 5,4);
+
+        // When
+        int age = person.getAge(testDate);
+
+        // Then
+        assertThat(age == 23).isTrue();
+    }
+
+    @Test
+    public void should_give_0_on_date_less_than_1_year_getAge()  {
+        // Given
+        testDate = new GregorianCalendar(1994, 1,1);
+
+        // When
+        int age = person.getAge(testDate);
+
+        // Then
+        assertThat(age == 0).isTrue();
+    }
+
 }
