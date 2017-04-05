@@ -14,12 +14,12 @@ import java.util.GregorianCalendar;
 
 public class PersonneTest extends AbstractPersonneTest {
 
-    public PersonneTest(IPerson person) {
-        super(person);
-    }
+    public PersonneTest(){
+        super();
+    };
 
     @Before
-    protected void setUp() {
+    public void setUp() {
         iPerson = new Person("Jensen", "JOYMANGUL", BIRTHYEAR, BIRTHMONTH, BIRTHDAY);
     }
 }

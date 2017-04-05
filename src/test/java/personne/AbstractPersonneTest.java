@@ -22,15 +22,9 @@ public abstract class AbstractPersonneTest {
 
     protected IPerson iPerson;
 
-    public AbstractPersonneTest(IPerson person) {
-        iPerson = person;
-    }
-
     protected static int theorical_age = 23;
 
     protected GregorianCalendar testDate;
-
-
 
     @Test(expected = NullPointerException.class)
     public void should_give_null_pointer_on_null_date_wasBorn() {
