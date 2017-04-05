@@ -12,7 +12,7 @@ import java.util.GregorianCalendar;
 
 public class PersonneTest {
 
-    protected static final int THEORIC_AGE = 23;
+    protected static int theorical_age = 23;
 
     protected static final int BIRTHDAY = 3;
     protected static final int BIRTHMONTH = 12;
@@ -85,6 +85,68 @@ public class PersonneTest {
 
         // Then
         assertThat(age == 0).isTrue();
+    }
+
+    @Test
+    public void should_give_false_on_previous_date_wasBorn() {
+        // Given
+        testDate = new GregorianCalendar(1993, 12, 2);
+
+        // When
+        boolean wasBorn = person.wasBorn(testDate);
+
+        // Then
+        assertThat(wasBorn).isFalse();
+    }
+
+    @Test
+    public void should_give_zero_on_previous_date_getAge() {
+        // Given
+        testDate = new GregorianCalendar(1993, 12, 2);
+
+        // When
+        int age = person.getAge(testDate);
+        theorical_age = 0;
+
+        // Then
+        assertThat(age == theorical_age).isTrue();
+    }
+
+    @Test
+    public void should_give_true_on_birth_date_wasBorn() {
+        // Given
+        testDate = new GregorianCalendar(BIRTHYEAR, BIRTHMONTH, BIRTHDAY);
+
+        // When
+        boolean wasBorn = person.wasBorn(testDate);
+
+        // Then
+        assertThat(wasBorn).isTrue();
+    }
+
+    @Test
+    public void should_give_zero_on_birth_date_getAge() {
+        // Given
+        testDate = new GregorianCalendar(BIRTHYEAR, BIRTHMONTH, BIRTHDAY);
+
+        // When
+        int age = person.getAge(testDate);
+        theorical_age = 0;
+
+        // Then
+        assertThat(age == theorical_age).isTrue();
+    }
+
+    public void should_give_correct_age_on_bissectile_date_getAge() {
+        // Given
+        testDate = new GregorianCalendar(2000, 12, 31);
+
+        // When
+        int age = person.getAge(testDate);
+        theorical_age = 7;
+
+        // Then
+        assertThat(age == theorical_age).isTrue();
     }
 
 }
