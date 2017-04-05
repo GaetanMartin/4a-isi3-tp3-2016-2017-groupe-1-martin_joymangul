@@ -103,6 +103,7 @@ public class PersonneTest {
         assertThat(age == theorical_age).isTrue();
     }
 
+    @Test
     public void should_give_correct_age_on_bissectile_date_getAge() {
         // Given
         testDate = new GregorianCalendar(2000, 12, 31);
@@ -113,6 +114,19 @@ public class PersonneTest {
 
         // Then
         assertThat(age == theorical_age).isTrue();
+    }
+
+    public void testGetAge() {
+        should_give_correct_age_on_bissectile_date_getAge();;
+        should_give_null_pointer_on_null_date_getAge();
+        should_give_zero_on_previous_date_getAge();
+        should_give_zero_on_birth_date_getAge();
+    }
+
+    public void testWasBorn() {
+        should_give_false_on_previous_date_wasBorn();
+        should_give_null_pointer_on_null_date_wasBorn();
+        should_give_true_on_birth_date_wasBorn();
     }
 
 }
