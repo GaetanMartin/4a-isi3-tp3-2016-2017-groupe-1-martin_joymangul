@@ -45,6 +45,29 @@ Plusieurs classes d'équivalences apparaissent alors :
 
 ## Question 2
 
+Tous les tests sont validés sauf 1 : 
+
+```java
+/**
+ * Ignore because this test should pass
+ */
+@Test
+@Ignore
+public void should_give_false_on_previous_date_wasBorn() {
+    // Given
+    testDate = new GregorianCalendar(1993, 12, 2);
+
+    // When
+    boolean wasBorn = person.wasBorn(testDate);
+
+    // Then
+    assertThat(wasBorn).isFalse();
+}
+```
+
+En effet, wasBorn devrait renvoyé false si on passe en paramètre une date antétieure à la date de naissance
+(ici date_naissance = 03/12/1993 et testDate = 02/12/1993)
+
 ## Question 3
 
 ## Question 4
