@@ -26,10 +26,9 @@ Plusieurs classes d'équivalences apparaissent alors :
 
 | Classes | Validité | Représentant | oracle  |  Contexte |
 |---|---|---|---|---|
-| Date passée | Valide | 30/03/2017 | false  | Né le 03/12/1993  |
-| Date exacte | Valide |  03/12/2016 | true  |  Né le 03/12/1993 |
-| Date future | Valide |  30/05/2017 | false  |  Né le 03/12/1993 |
-| Date aujourd'hui | Valide | 05/04/2000  | false  | Né le 03/12/1993  |
+| Date passée | Valide | 30/03/1992 | false  | Né le 03/12/1993  |
+| Date exacte | Valide |  03/12/1993 | true  |  Né le 03/12/1993 |
+| Date future | Valide |  30/05/2017 | true  |  Né le 03/12/1993 |
 | Date nulle | Invalide | null  | echec  |  Né le 03/12/1993 |
 
 + ### Pour getAge
