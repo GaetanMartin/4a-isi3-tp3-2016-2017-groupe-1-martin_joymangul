@@ -40,18 +40,6 @@ public class PersonneTest {
         // assertThat(result).isTrue();
     }
 
-    @Test (expected = NullPointerException.class)
-    public void should_give_null_pointer_on_null_date_getAge() {
-        // Given
-        testDate = null;
-
-        // When
-        int age = person.getAge(testDate);
-
-        // Then
-        // assertThat(age == THEORIC_AGE).isTrue();
-    }
-
     @Test
     @Ignore
     public void should_give_false_on_previous_date_wasBorn() {
@@ -63,6 +51,43 @@ public class PersonneTest {
 
         // Then
         assertThat(wasBorn).isFalse();
+    }
+
+    @Test
+    public void should_give_true_on_birth_date_wasBorn() {
+        // Given
+        testDate = new GregorianCalendar(BIRTHYEAR, BIRTHMONTH, BIRTHDAY);
+
+        // When
+        boolean wasBorn = person.wasBorn(testDate);
+
+        // Then
+        assertThat(wasBorn).isTrue();
+    }
+
+    @Test
+    public void should_give_true_after_date_wasBorn() {
+        // Given
+        testDate = new GregorianCalendar(2017, 5, 30);
+
+        // When
+        boolean wasBorn = person.wasBorn(testDate);
+
+        // Then
+        assertThat(wasBorn).isTrue();
+    }
+
+
+    @Test (expected = NullPointerException.class)
+    public void should_give_null_pointer_on_null_date_getAge() {
+        // Given
+        testDate = null;
+
+        // When
+        int age = person.getAge(testDate);
+
+        // Then
+        // assertThat(age == THEORIC_AGE).isTrue();
     }
 
     @Test
@@ -79,21 +104,37 @@ public class PersonneTest {
     }
 
     @Test
-    public void should_give_true_on_birth_date_wasBorn() {
+    public void should_give_23_on_after_date_getAge() {
         // Given
-        testDate = new GregorianCalendar(BIRTHYEAR, BIRTHMONTH, BIRTHDAY);
+        testDate = new GregorianCalendar(2017, 5, 4);
 
         // When
-        boolean wasBorn = person.wasBorn(testDate);
+        int age = person.getAge(testDate);
+        theorical_age = 23;
 
         // Then
-        assertThat(wasBorn).isTrue();
+        assertThat(age == theorical_age).isTrue();
     }
+
+
 
     @Test
     public void should_give_zero_on_birth_date_getAge() {
         // Given
         testDate = new GregorianCalendar(BIRTHYEAR, BIRTHMONTH, BIRTHDAY);
+
+        // When
+        int age = person.getAge(testDate);
+        theorical_age = 0;
+
+        // Then
+        assertThat(age == theorical_age).isTrue();
+    }
+
+    @Test
+    public void should_give_zero_on_birth_date__less_than_1_year_getAge() {
+        // Given
+        testDate = new GregorianCalendar(1994, 1, 1);
 
         // When
         int age = person.getAge(testDate);
