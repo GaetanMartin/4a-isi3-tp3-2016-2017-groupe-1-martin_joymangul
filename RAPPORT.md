@@ -4,7 +4,9 @@
 
 # Rapport TP3
 
-## Question 1
+## Tests boite noire
+
+### Question 1
 
 Deux méthodes sont à tester : 
 
@@ -22,7 +24,7 @@ Plusieurs classes d'équivalences apparaissent alors :
 - Une date nulle
 - L'age pour une année bissectile
 
-+ ### Pour wasBorn
++ #### Pour wasBorn
 
 | Classes     | Validité | Représentant | oracle | Contexte         |
 |-------------|----------|--------------|--------|------------------|
@@ -31,7 +33,7 @@ Plusieurs classes d'équivalences apparaissent alors :
 | Date future | Valide   | 30/05/2017   | true   | Né le 03/12/1993 |
 | Date nulle  | Invalide | null         | echec  | Né le 03/12/1993 |
 
-+ ### Pour getAge
++ #### Pour getAge
 
 | Classes              | Validité | Représentant | oracle | Contexte         |
 |----------------------|----------|--------------|--------|------------------|
@@ -43,7 +45,7 @@ Plusieurs classes d'équivalences apparaissent alors :
 | Date nulle           | Invalide | null         | Echec  | Né le 03/12/1993 |
 
 
-## Question 2
+### Question 2
 
 Tous les tests sont validés sauf 1 : 
 
@@ -68,14 +70,38 @@ public void should_give_false_on_previous_date_wasBorn() {
 En effet, wasBorn devrait renvoyé false si on passe en paramètre une date antétieure à la date de naissance
 (ici date_naissance = 03/12/1993 et testDate = 02/12/1993)
 
-## Question 3
+### Question 3
 
-## Question 4
+On a créé une classe abstraite AbscractPersonneTest
 
-## Question 5
+Ainsi pour tester toutes les implémentations de IPerson, il suffit de créer une 
+nouvelle classe héritant de AbstractPersonneTest et de surcharger les personnes nécessaires :
 
-## Question 6
+```java
+@Before
+protected void setUp() {
+    iPerson = new Person("Jensen", "JOYMANGUL", BIRTHYEAR, BIRTHMONTH, BIRTHDAY);
+}
+```
 
-## Question 7
+### Question 4
 
-## Question 8
+Etendre toutes les sous classes
+
+    EfficientPerson, OneMorePerson, Person, SimplePerson, SmallCodePerson
+
+### Question 5
+
+Pattern adapter
+
+## Tests en isolation et Mock
+
+### Question 6
+
+### Question 7
+
+### Question 8
+
+### Question 9
+
+### Question 10
