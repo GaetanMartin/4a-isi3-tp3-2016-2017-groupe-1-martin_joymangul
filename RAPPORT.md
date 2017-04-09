@@ -75,7 +75,7 @@ En effet, wasBorn devrait renvoyé false si on passe en paramètre une date ant�
 On a créé une classe abstraite AbscractPersonneTest
 
 Ainsi pour tester toutes les implémentations de IPerson, il suffit de créer une 
-nouvelle classe héritant de AbstractPersonneTest et de surcharger les personnes nécessaires :
+nouvelle classe héritant de AbstractPersonneTest et de surcharger les méthodes nécessaires :
 
 ```java
 @Before
@@ -86,13 +86,17 @@ protected void setUp() {
 
 ### Question 4
 
-Etendre toutes les sous classes
+Etendre toutes les classes implémentant IPerson : 
 
     EfficientPerson, OneMorePerson, Person, SimplePerson, SmallCodePerson
-
+    
+Sont testées par les classes : 
+    
+    EfficientPersonTest, OneMorePersonTest, PersonTest, SimplePersonTest, SmallCodePersonTest
+    
 ### Question 5
 
-Pattern adapter
+Pattern adapter appliqué avec la classe PersonneAdapter
 
 ## Tests en isolation et Mock
 
