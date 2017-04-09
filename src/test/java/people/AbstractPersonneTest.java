@@ -1,4 +1,4 @@
-package personne;
+package people;
 
 import org.junit.Before;
 import org.junit.Ignore;

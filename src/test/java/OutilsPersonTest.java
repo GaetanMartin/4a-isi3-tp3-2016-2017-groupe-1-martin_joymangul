@@ -39,24 +39,30 @@ public class OutilsPersonTest {
 
     @Test
     public void testRangePersons() {
-        assertThat(OutilsPerson.getPersonsInRangeAge(this.persons, testDate, 15, 25).size()).isEqualTo(1);
+        assertThat(OutilsPerson.getInstance().getPersonsInRangeAge(this.persons, testDate, 15, 25).size()).isEqualTo(1);
     }
 
     @Test
     public void testMaxAge() {
-        assertThat(OutilsPerson.getMaxAge(this.persons, this.testDate)).isEqualTo(20);
+        assertThat(OutilsPerson.getInstance().getMaxAge(this.persons, this.testDate)).isEqualTo(20);
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void should_get_illegal_argument_exception() {
-        OutilsPerson.getPersonsInRangeAge(this.persons, this.testDate, 25, 15);
+        OutilsPerson.getInstance().getPersonsInRangeAge(this.persons, this.testDate, 25, 15);
     }
 
     @Test
     public void should_get_minus1_getMaxAge() {
         List<IPerson> personsEmpty = new ArrayList<>();
-        int age = OutilsPerson.getMaxAge(personsEmpty, this.testDate);
+        int age = OutilsPerson.getInstance().getMaxAge(personsEmpty, this.testDate);
         assertThat(age == -1).isEqualTo(true);
+    }
+
+    @Test
+    public void should_get_empty_list() {
+        assertThat(OutilsPerson.getInstance().getPersonsInRangeAge(
+                this.persons, testDate, 70, 90).size()).isEqualTo(0);
     }
 
 

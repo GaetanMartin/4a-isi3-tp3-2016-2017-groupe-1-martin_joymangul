@@ -14,6 +14,17 @@ import java.util.List;
  */
 public class OutilsPerson {
 
+    private static OutilsPerson instance;
+
+    private OutilsPerson() {}
+
+    public static OutilsPerson getInstance() {
+        if (instance == null) {
+            instance = new OutilsPerson();
+        }
+        return instance;
+    }
+
 
     /**
      * Question 6
@@ -23,7 +34,7 @@ public class OutilsPerson {
      * @param ageMax max age
      * @return list of persons in range
      */
-    public static List<IPerson> getPersonsInRangeAge(List<IPerson> persons, GregorianCalendar date, int ageMin, int ageMax) {
+    public List<IPerson> getPersonsInRangeAge(List<IPerson> persons, GregorianCalendar date, int ageMin, int ageMax) {
         List<IPerson> returnPersons = new ArrayList<>();
 
         if (ageMin > ageMax) throw new IllegalArgumentException("Age min > age max");
@@ -43,18 +54,14 @@ public class OutilsPerson {
      * @param persons list of persons to test
      * @return max Age
      */
-    public static int getMaxAge(List<IPerson> persons, GregorianCalendar date) {
+    public int getMaxAge(List<IPerson> persons, GregorianCalendar date) {
         int maxAge = -1;
-        int currentAge;
         for (IPerson person : persons) {
-            if ((currentAge = person.getAge(date)) > maxAge) {
-                maxAge = currentAge;
+            if (person.getAge(date) > maxAge) {
+                maxAge = person.getAge(date);
             }
         }
         return maxAge;
     }
-
-
-
 
 }
