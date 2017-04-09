@@ -102,7 +102,19 @@ Pattern adapter appliqué avec la classe PersonneAdapter
 
 ### Question 6
 
+Voir la classe OutilPerson. 
+
+```java
+public List<IPerson> getPersonsInRangeAge(List<IPerson> persons, GregorianCalendar date, int ageMin, int ageMax)
+```
+
 ### Question 7
+
+Voir la classe OutilPerson.
+
+```java
+public int getMaxAge(List<IPerson> persons, GregorianCalendar date)
+```
 
 ### Question 8
 
