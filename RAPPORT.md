@@ -102,7 +102,7 @@ Pattern adapter appliqué avec la classe PersonneAdapter
 
 ### Question 6
 
-Voir la classe OutilPerson. 
+Voir la classe OutilsPerson. 
 
 ```java
 public List<IPerson> getPersonsInRangeAge(List<IPerson> persons, GregorianCalendar date, int ageMin, int ageMax)
@@ -110,7 +110,7 @@ public List<IPerson> getPersonsInRangeAge(List<IPerson> persons, GregorianCalend
 
 ### Question 7
 
-Voir la classe OutilPerson.
+Voir la classe OutilsPerson.
 
 ```java
 public int getMaxAge(List<IPerson> persons, GregorianCalendar date)
@@ -118,6 +118,67 @@ public int getMaxAge(List<IPerson> persons, GregorianCalendar date)
 
 ### Question 8
 
+Voir la classe OutilsPersonTest. 
+
++ Génération des données de test :
+
+```java
+@Before
+public void setUp() {
+
+    this.persons = new ArrayList<>();
+    this.testDate = new GregorianCalendar(2000, 10, 5);
+    //this.testDate = any(GregorianCalendar.class);
+
+    Person person = Mockito.mock(Person.class);
+    Mockito.when(person.getAge(testDate)).thenReturn(10);
+    persons.add(person);
+    person = Mockito.mock(Person.class);
+    Mockito.when(person.getAge(this.testDate)).thenReturn(20);
+    persons.add(person);
+}
+```
++ Appel des méthodes tests :
+
+```java
+@Test
+public void testRangePersons() {
+    assertThat(OutilsPerson.getInstance().getPersonsInRangeAge(this.persons, testDate, 15, 25).size()).isEqualTo(1);
+}
+
+@Test
+public void testMaxAge() {
+    assertThat(OutilsPerson.getInstance().getMaxAge(this.persons, this.testDate)).isEqualTo(20);
+}
+
+@Test(expected = IllegalArgumentException.class)
+public void should_get_illegal_argument_exception() {
+    OutilsPerson.getInstance().getPersonsInRangeAge(this.persons, this.testDate, 25, 15);
+}
+```
+
 ### Question 9
+
+Avec l'outil coverage d'Intellij :
+
+![ScreenShot Coverage](images/coverage.png)
+
+Note : pour obtenir le 100%, nous avons été obligé de transformer OutilsPersonne en singleton 
+au lieu d'utiliser des méthodes statiques (il manquait le % du constructeur inutilisé) : 
+```java
+public class OutilsPerson {
+
+    private static OutilsPerson instance;
+
+    private OutilsPerson() {}
+
+    public static OutilsPerson getInstance() {
+        if (instance == null) {
+            instance = new OutilsPerson();
+        }
+        return instance;
+    }
+```
+
 
 ### Question 10
