@@ -1,6 +1,6 @@
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.mockito.Mockito;
 import persons.IPerson;
 import persons.Person;
 
@@ -10,6 +10,7 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Matchers.any;
+import static org.mockito.Mockito.*;
 
 /**
  * Created by p1509413 on 05/04/2017.
@@ -17,9 +18,9 @@ import static org.mockito.Matchers.any;
  */
 public class OutilsPersonTest {
 
-    public List<IPerson> persons;
+    private List<IPerson> persons;
 
-    public GregorianCalendar testDate;
+    private GregorianCalendar testDate;
 
     @Before
     public void setUp() {
@@ -28,11 +29,11 @@ public class OutilsPersonTest {
         this.testDate = new GregorianCalendar(2000, 10, 5);
         //this.testDate = any(GregorianCalendar.class);
 
-        Person person = Mockito.mock(Person.class);
-        Mockito.when(person.getAge(testDate)).thenReturn(10);
+        Person person = mock(Person.class);
+        when(person.getAge(testDate)).thenReturn(10);
         persons.add(person);
-        person = Mockito.mock(Person.class);
-        Mockito.when(person.getAge(this.testDate)).thenReturn(20);
+        person = mock(Person.class);
+        when(person.getAge(this.testDate)).thenReturn(20);
         persons.add(person);
 
     }
@@ -40,11 +41,13 @@ public class OutilsPersonTest {
     @Test
     public void testRangePersons() {
         assertThat(OutilsPerson.getInstance().getPersonsInRangeAge(this.persons, testDate, 15, 25).size()).isEqualTo(1);
+        // verifyDataAreAnonymouslyCalled();
     }
 
     @Test
     public void testMaxAge() {
         assertThat(OutilsPerson.getInstance().getMaxAge(this.persons, this.testDate)).isEqualTo(20);
+        // verifyDataAreAnonymouslyCalled();
     }
 
     @Test(expected = IllegalArgumentException.class)
@@ -57,13 +60,26 @@ public class OutilsPersonTest {
         List<IPerson> personsEmpty = new ArrayList<>();
         int age = OutilsPerson.getInstance().getMaxAge(personsEmpty, this.testDate);
         assertThat(age == -1).isEqualTo(true);
+//        // verifyDataAreAnonymouslyCalled();
     }
 
     @Test
     public void should_get_empty_list() {
         assertThat(OutilsPerson.getInstance().getPersonsInRangeAge(
                 this.persons, testDate, 70, 90).size()).isEqualTo(0);
+        // verifyDataAreAnonymouslyCalled();
     }
 
+    /**
+     * Check that the mocks are anonymously filling the persons
+     */
+    @After
+    public void verifyDataAreAnonymouslyCalled() {
+        for (IPerson person : this.persons) {
+            verify(person, never()).getFirstName();
+            verify(person, never()).getName();
+            verify(person, atLeastOnce()).getAge(any(GregorianCalendar.class));
+        }
+    }
 
 }

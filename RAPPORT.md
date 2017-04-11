@@ -182,3 +182,29 @@ public class OutilsPerson {
 
 
 ### Question 10
+
+Utilisation de la méthode verify de Mockito avec les fonctions never pour vérifier que les noms sont jamais utilisés
+et atLeastOne pour s'assurer que getAge est au moins appelée une fois. 
+Il suffit d'appeler la méthode ci-dessous après les tests : 
+
+```java
+/**
+ * Check that the mocks are anonymously filling the persons
+ */
+@After
+private void verifyDataAreAnonymouslyCalled() {
+    for(IPerson person : this.persons) {
+        verify(person, never()).getFirstName();
+        verify(person, never()).getName();
+        verify(person, atLeastOnce()).getAge(any(GregorianCalendar.class));
+    }
+}
+```
+
+Note : pour certains tests, la méthode getAge n'est pas appellée, on a donc le message : 
+```
+Wanted but not invoked:
+person.getAge(<any>);
+-> at OutilsPersonTest.verifyDataAreAnonymouslyCalled(OutilsPersonTest.java:81)
+Actually, there were zero interactions with this mock.
+```
